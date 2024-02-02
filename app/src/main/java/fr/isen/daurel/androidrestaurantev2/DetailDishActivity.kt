@@ -17,7 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import fr.isen.daurel.androidrestaurantev2.ui.theme.ui.theme.AndroidRestauranteV2Theme
+import fr.isen.daurel.androidrestaurantev2.ui.theme.AndroidRestauranteV2Theme
 
 class DetailDishActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

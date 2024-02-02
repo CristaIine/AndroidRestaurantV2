@@ -15,12 +15,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import fr.isen.daurel.androidrestaurantev2.modele.Items
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DishCard(dish: Dish, goToDetail:(String) -> Unit) {
+fun DishCard(dish: Items, goToDetail: (Items) -> Unit) {
     Card(
-        onClick = {goToDetail(dish.name) },
+        onClick = {goToDetail(dish) },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
@@ -32,8 +33,8 @@ fun DishCard(dish: Dish, goToDetail:(String) -> Unit) {
                 .padding(horizontal = 12.dp)
         ) {
             Image(
-                painter = painterResource(id = dish.image),
-                contentDescription = dish.name,
+                painter = painterResource(R.drawable.robot),
+                contentDescription = dish.nameFr,
                 modifier = Modifier
                     .size(40.dp)
             )
@@ -44,21 +45,16 @@ fun DishCard(dish: Dish, goToDetail:(String) -> Unit) {
                     .fillMaxWidth()
             ) {
                 Text(
-                    dish.name,
+                    dish.nameFr ?:"",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                 )
-                Text(
-                    dish.desc,
-                    fontWeight = FontWeight.Light,
-                    fontSize = 16.sp,
-                )
+//                Text(
+//                    dish.prices[1],
+//                    fontWeight = FontWeight.Bold,
+//                    fontSize = 16.sp,
+//                )
             }
-            Text(
-                dish.prix.toString() + "€",
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
-            )
         }
     }
 }

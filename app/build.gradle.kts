@@ -63,6 +63,7 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("com.google.ai.client.generativeai:generativeai:0.1.2")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
+    implementation("io.coil-kt:coil-compose:2.4.0")
     implementation ("com.android.volley:volley:1.2.0")
     implementation ("com.google.code.gson:gson:2.8.9")
     testImplementation("junit:junit:4.13.2")

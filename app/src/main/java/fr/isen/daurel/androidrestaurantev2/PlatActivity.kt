@@ -35,6 +35,7 @@ import fr.isen.daurel.androidrestaurantev2.modele.DataResult
 import fr.isen.daurel.androidrestaurantev2.modele.Items
 import fr.isen.daurel.androidrestaurantev2.ui.theme.AndroidRestauranteV2Theme
 import org.json.JSONObject
+import java.io.Serializable
 
 class PlatActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,10 +62,10 @@ class PlatActivity : ComponentActivity() {
     private fun goToDetail(dish: Items) {
         Toast.makeText(this, dish.nameFr, Toast.LENGTH_LONG).show()
         val intent = Intent(this, DetailDishActivity::class.java)
-        intent.putExtra("dish", dish.toString())
+        intent.putExtra("dish", dish as Serializable)
         startActivity(intent)
     }
-    
+
     private fun fetchdata(nomCategorie: String, itemsState: SnapshotStateList<Items>) {
         val url = "http://test.api.catering.bluecodegames.com/menu"
         val jsonObject = JSONObject()

@@ -109,7 +109,7 @@ fun Greeting(onMenuClick: (String) -> Unit) {
                 .fillMaxWidth()
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                eachButton("Entrée", onMenuClick)
+                eachButton("Entrées", onMenuClick)
 
                 Spacer(modifier = Modifier.height(5.dp)) // Ajout d'un espace vertical
 

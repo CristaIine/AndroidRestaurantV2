@@ -81,7 +81,7 @@ class PlatActivity : ComponentActivity() {
                 // Filtrer les données en fonction de la catégorie précédemment sélectionnée
                 val filteredItems = result.data.find { it.nameFr == nomCategorie }?.items ?: emptyList()
                 Log.d("PlatActivity","les données filtrés : $filteredItems")
-                itemsState.addAll(result.data[0].items)
+                itemsState.addAll(filteredItems)
             },
             {
                 Log.e("PlatActivity","error : $it")

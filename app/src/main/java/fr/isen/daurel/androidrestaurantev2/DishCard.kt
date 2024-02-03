@@ -49,11 +49,6 @@ fun DishCard(dish: Items, goToDetail: (Items) -> Unit) {
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                 )
-//                Text(
-//                    dish.prices[1],
-//                    fontWeight = FontWeight.Bold,
-//                    fontSize = 16.sp,
-//                )
             }
         }
     }

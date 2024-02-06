@@ -93,7 +93,7 @@ fun Greeting(onMenuClick: (String) -> Unit) {
             )
             Spacer(modifier = Modifier.width(30.dp))
             Text(
-                "Welcome to the \n  Bar à droid",
+                "Welcome to le \n  Bar du droïd",
                 fontSize = 24.sp,
                 color = Color.White
             )

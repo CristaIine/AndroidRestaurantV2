@@ -8,12 +8,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -31,8 +33,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import fr.isen.daurel.androidrestaurantev2.modele.DataResult
@@ -67,7 +71,7 @@ fun DishScreen(dish: Items) {
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = dish.nameFr ?:"", fontWeight = FontWeight.ExtraBold)
+                    Text(text = dish.nameFr ?: "", fontWeight = FontWeight.ExtraBold)
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -81,30 +85,60 @@ fun DishScreen(dish: Items) {
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            LazyRow(
-                modifier = Modifier.fillMaxWidth(),
-                contentPadding = PaddingValues(vertical = 30.dp)
+            Column(
+                modifier = Modifier.padding(vertical = 16.dp)
             ) {
-                items(dish.images) {
-                    AsyncImage(
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(it)
-                            .crossfade(true)
-                            .build(),
-                        placeholder = painterResource(R.drawable.robot),
-                        contentDescription = null,
-                        contentScale = ContentScale.Fit,
-                        modifier = Modifier
-                            .height(200.dp)
-                            .background(Color.LightGray)
-                            .padding(end = 4.dp)
-                    )
+                // Afficher les images
+                LazyRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(250.dp)
+                        .weight(0.4f)
+                ) {
+                    items(dish.images) { imageUrl ->
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(imageUrl)
+                                .crossfade(true)
+                                .build(),
+                            placeholder = painterResource(R.drawable.robot),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .height(200.dp)
+                                .width(200.dp)
+                                .padding(horizontal = 8.dp)
+                        )
+                    }
+                }
+
+                // Afficher la liste des ingrédients
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                ) {
+                    item {
+                        Text(
+                            text = "Ingrédients :",
+                            fontSize = 20.sp,
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp)
+                        )
+                    }
+                    items(dish.ingredients) { ingredient ->
+                        Text(
+                            text = "- ${ingredient.nameFr ?: ""}",
+                            fontSize = 16.sp,
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+                        )
+                    }
                 }
             }
         }
     }
 }
-
 
 
 @Preview(showBackground = true)
@@ -114,10 +148,12 @@ fun DetailDishActivityPreview() {
     val dish = Items(
         id = "1",
         nameFr = "Boeuf",
-        images = arrayListOf("https://www.boeuf-irlandais.fr/wp-content/uploads/sites/10/2021/07/boeuf-irlandais-organic_beef_farm-mobile.jpg",
-        "https://www.shutterstock.com/image-vector/black-brown-bull-male-farm-600nw-2270855067.jpg",
-        "https://observatoire-des-aliments.fr/wp-content/uploads/2013/01/le-boeuf-1.jpg")
+        images = arrayListOf(
+            "https://www.boeuf-irlandais.fr/wp-content/uploads/sites/10/2021/07/boeuf-irlandais-organic_beef_farm-mobile.jpg",
+            "https://www.shutterstock.com/image-vector/black-brown-bull-male-farm-600nw-2270855067.jpg",
+            "https://observatoire-des-aliments.fr/wp-content/uploads/2013/01/le-boeuf-1.jpg"
         )
+    )
 
     AndroidRestauranteV2Theme {
 
